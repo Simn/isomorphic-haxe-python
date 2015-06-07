@@ -1,0 +1,9 @@
+-js build/static/js/client.js
+-main Client
+-lib erazor
+-dce full
+--next
+-python build/server.py
+-main Server
+-lib erazor
+-dce full
