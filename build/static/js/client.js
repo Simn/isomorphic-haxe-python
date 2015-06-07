@@ -30,7 +30,7 @@ var StringTools = function() { };
 StringTools.__name__ = true;
 StringTools.htmlEscape = function(s,quotes) {
 	s = s.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;");
-	if(quotes) return s.split("\"").join("&quot;").split("'").join("&#039;"); else return s;
+	return quotes?s.split("\"").join("&quot;").split("'").join("&#039;"):s;
 };
 var erazor_macro_Template = function() {
 };
@@ -97,9 +97,8 @@ erazor_Output.prototype = $extend(StringBuf.prototype,{
 		return str;
 	}
 	,unsafeAdd: function(str) {
-		var val;
-		if(js_Boot.__instanceof(str,erazor_TString)) val = str.toString(); else val = this.escape(Std.string(str));
-		if(val == null) this.b += "null"; else this.b += "" + val;
+		var val = js_Boot.__instanceof(str,erazor_TString)?str.toString():this.escape(Std.string(str));
+		this.b += val == null?"null":"" + val;
 	}
 	,__class__: erazor_Output
 });

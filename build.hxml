@@ -2,8 +2,10 @@
 -main Client
 -lib erazor
 -dce full
+-D analyzer
 --next
 -python build/server.py
 -main Server
 -lib erazor
 -dce full
+-D analyzer

@@ -25,10 +25,19 @@ class Enum:
 		self.params = params
 
 	def __str__(self):
-		if (self.params is None):
-			return self.tag
+		tmp = self.params
+		tmp1 = (tmp is None)
+		tmp2 = None
+		if tmp1:
+			tmp2 = self.tag
 		else:
-			return (((HxOverrides.stringOrNull(self.tag) + "(") + HxOverrides.stringOrNull(",".join([python_Boot.toString1(x1,'') for x1 in self.params]))) + ")")
+			tmp3 = self.tag
+			tmp4 = (("null" if tmp3 is None else tmp3) + "(")
+			tmp5 = ",".join([python_Boot.toString1(x1,'') for x1 in self.params])
+			tmp6 = tmp5
+			tmp7 = (("null" if tmp4 is None else tmp4) + ("null" if tmp6 is None else tmp6))
+			tmp2 = (("null" if tmp7 is None else tmp7) + ")")
+		return tmp2
 
 
 
@@ -42,7 +51,10 @@ class Reflect:
 
 	@staticmethod
 	def field(o,field):
-		return python_Boot.field(o,field)
+		tmp = o
+		tmp1 = field
+		tmp2 = python_Boot.field(tmp,tmp1)
+		return tmp2
 
 
 class Server:
@@ -62,10 +74,12 @@ class Server:
 
 	@staticmethod
 	def serverSide():
-		template = Template()
+		tmp = Template()
+		template = tmp
 		template.title = "Hello from server side"
 		template.body = "This content is rendered in python"
-		return template.execute()
+		tmp1 = template.execute()
+		return tmp1
 
 
 class Std:
@@ -131,30 +145,27 @@ class Std:
 		if _hx_local_6():
 			return True
 		if python_lib_Inspect.isclass(t):
-			loop = None
-			loop1 = None
-			def _hx_local_8(intf):
-				f1 = None
-				if hasattr(intf,"_hx_interfaces"):
-					f1 = intf._hx_interfaces
-				else:
-					f1 = []
-				if (f1 is not None):
-					_g = 0
-					while (_g < len(f1)):
-						i = (f1[_g] if _g >= 0 and _g < len(f1) else None)
-						_g = (_g + 1)
-						if HxOverrides.eq(i,t):
-							return True
-						else:
-							l = loop1(i)
-							if l:
+			def _hx_local_7():
+				loop1 = None
+				def _hx_local_9(intf):
+					f1 = (intf._hx_interfaces if (hasattr(intf,"_hx_interfaces")) else [])
+					if (f1 is not None):
+						_g = 0
+						while (_g < len(f1)):
+							i = (f1[_g] if _g >= 0 and _g < len(f1) else None)
+							_g = (_g + 1)
+							if HxOverrides.eq(i,t):
 								return True
-					return False
-				else:
-					return False
-			loop1 = _hx_local_8
-			loop = loop1
+							else:
+								l = loop1(i)
+								if l:
+									return True
+						return False
+					else:
+						return False
+				loop1 = _hx_local_9
+				return loop1
+			loop = _hx_local_7()
 			currentClass = v.__class__
 			while (currentClass is not None):
 				if loop(currentClass):
@@ -166,7 +177,9 @@ class Std:
 
 	@staticmethod
 	def string(s):
-		return python_Boot.toString1(s,"")
+		tmp = s
+		tmp1 = python_Boot.toString1(tmp,"")
+		return tmp1
 
 
 class Float:
@@ -191,7 +204,8 @@ class StringBuf:
 
 	def __init__(self):
 		self.b = None
-		self.b = python_lib_io_StringIO()
+		tmp = python_lib_io_StringIO()
+		self.b = tmp
 
 
 
@@ -201,25 +215,40 @@ class StringTools:
 
 	@staticmethod
 	def htmlEscape(s,quotes = None):
-		_this = None
-		_this1 = None
-		_this2 = None
-		_this3 = None
-		_this4 = s.split("&")
-		_this3 = "&amp;".join([python_Boot.toString1(x1,'') for x1 in _this4])
-		_this2 = _this3.split("<")
-		_this1 = "&lt;".join([python_Boot.toString1(x1,'') for x1 in _this2])
-		_this = _this1.split(">")
-		s = "&gt;".join([python_Boot.toString1(x1,'') for x1 in _this])
+		tmp = None
+		tmp1 = None
+		tmp2 = None
+		tmp3 = None
+		tmp4 = None
+		_this = s.split("&")
+		tmp5 = "&amp;".join([python_Boot.toString1(x1,'') for x1 in _this])
+		tmp4 = tmp5
+		_this1 = tmp4
+		tmp3 = _this1.split("<")
+		_this2 = tmp3
+		tmp6 = "&lt;".join([python_Boot.toString1(x1,'') for x1 in _this2])
+		tmp2 = tmp6
+		_this3 = tmp2
+		tmp1 = _this3.split(">")
+		_this4 = tmp1
+		tmp7 = "&gt;".join([python_Boot.toString1(x1,'') for x1 in _this4])
+		tmp = tmp7
+		s = tmp
+		tmp8 = None
 		if quotes:
-			_this5 = None
-			_this6 = None
-			_this7 = s.split("\"")
-			_this6 = "&quot;".join([python_Boot.toString1(x1,'') for x1 in _this7])
-			_this5 = _this6.split("'")
-			return "&#039;".join([python_Boot.toString1(x1,'') for x1 in _this5])
+			tmp9 = None
+			tmp10 = None
+			_this5 = s.split("\"")
+			tmp11 = "&quot;".join([python_Boot.toString1(x1,'') for x1 in _this5])
+			tmp10 = tmp11
+			_this6 = tmp10
+			tmp9 = _this6.split("'")
+			_this7 = tmp9
+			tmp12 = "&#039;".join([python_Boot.toString1(x1,'') for x1 in _this7])
+			tmp8 = tmp12
 		else:
-			return s
+			tmp8 = s
+		return tmp8
 
 
 class erazor_macro_Template:
@@ -242,7 +271,9 @@ class erazor_macro_HtmlTemplate(erazor_macro_Template):
 		super().__init__()
 
 	def escape(self,_hx_str):
-		return StringTools.htmlEscape(_hx_str,True)
+		tmp = _hx_str
+		tmp1 = StringTools.htmlEscape(tmp,True)
+		return tmp1
 
 
 
@@ -261,13 +292,18 @@ class Template(erazor_macro_HtmlTemplate):
 		super().__init__()
 
 	def execute(self):
-		__b__ = erazor_Output(self.escape)
+		tmp = self.escape
+		tmp1 = erazor_Output(tmp)
+		__b__ = tmp1
 		__b__.b.write("<h1>")
-		__b__.unsafeAdd(self.title)
+		tmp2 = self.title
+		__b__.unsafeAdd(tmp2)
 		__b__.b.write("</h1>\n<br>\n<p>")
-		__b__.unsafeAdd(self.body)
+		tmp3 = self.body
+		__b__.unsafeAdd(tmp3)
 		__b__.b.write("</p>\n")
-		return __b__.b.getvalue()
+		tmp4 = __b__.b.getvalue()
+		return tmp4
 
 
 
@@ -277,7 +313,8 @@ class erazor_TString:
 	_hx_methods = ["toString"]
 
 	def toString(self):
-		return self.s
+		tmp = self.s
+		return tmp
 
 
 
@@ -291,10 +328,14 @@ class erazor_UnsafeString(erazor_TString):
 
 
 	def escape(self,_hx_str):
-		return StringTools.htmlEscape(_hx_str,True)
+		tmp = _hx_str
+		tmp1 = StringTools.htmlEscape(tmp,True)
+		return tmp1
 
 	def toString(self):
-		return self.escape(self.s)
+		tmp = self.s
+		tmp1 = self.escape(tmp)
+		return tmp1
 
 
 
@@ -308,20 +349,29 @@ class erazor_Output(StringBuf):
 
 
 	def __init__(self,escapeMethod = None):
-		if (escapeMethod is not None):
+		tmp = (escapeMethod is not None)
+		if tmp:
 			self.escape = escapeMethod
 		super().__init__()
 
 	def escape(self,_hx_str):
-		return _hx_str
+		tmp = _hx_str
+		return tmp
 
 	def unsafeAdd(self,_hx_str):
-		val = None
-		if Std._hx_is(_hx_str,erazor_TString):
-			val = Reflect.field(_hx_str,"toString")()
+		tmp = _hx_str
+		tmp1 = Std._hx_is(tmp,erazor_TString)
+		tmp2 = None
+		if tmp1:
+			tmp2 = Reflect.field(_hx_str,"toString")()
 		else:
-			val = self.escape(Std.string(_hx_str))
-		self.b.write(Std.string(val))
+			tmp3 = _hx_str
+			tmp4 = Std.string(tmp3)
+			tmp2 = self.escape(tmp4)
+		val = tmp2
+		tmp5 = self.b
+		tmp6 = Std.string(val)
+		tmp5.write(tmp6)
 
 
 
@@ -389,15 +439,16 @@ class python_Boot:
 				toStr = None
 				try:
 					fields = python_Boot.fields(o)
-					fieldsStr = None
-					_g1 = []
-					_g11 = 0
-					while (_g11 < len(fields)):
-						f = (fields[_g11] if _g11 >= 0 and _g11 < len(fields) else None)
-						_g11 = (_g11 + 1)
-						x = ((("" + ("null" if f is None else f)) + " : ") + HxOverrides.stringOrNull(python_Boot.toString1(python_Boot.simpleField(o,f),(("null" if s is None else s) + "\t"))))
-						_g1.append(x)
-					fieldsStr = _g1
+					def _hx_local_5():
+						_g1 = []
+						_g11 = 0
+						while (_g11 < len(fields)):
+							f = (fields[_g11] if _g11 >= 0 and _g11 < len(fields) else None)
+							_g11 = (_g11 + 1)
+							x = ((("" + ("null" if f is None else f)) + " : ") + HxOverrides.stringOrNull(python_Boot.toString1(python_Boot.simpleField(o,f),(("null" if s is None else s) + "\t"))))
+							_g1.append(x)
+						return _g1
+					fieldsStr = _hx_local_5()
 					toStr = (("{ " + HxOverrides.stringOrNull(", ".join([x1 for x1 in fieldsStr]))) + " }")
 				except Exception as _hx_e:
 					_hx_e1 = _hx_e
@@ -427,28 +478,30 @@ class python_Boot:
 			if hasattr(o,"_hx_class_name"):
 				if (o.__class__.__name__ != "type"):
 					fields1 = python_Boot.getInstanceFields(o)
-					fieldsStr1 = None
-					_g3 = []
-					_g12 = 0
-					while (_g12 < len(fields1)):
-						f1 = (fields1[_g12] if _g12 >= 0 and _g12 < len(fields1) else None)
-						_g12 = (_g12 + 1)
-						x1 = ((("" + ("null" if f1 is None else f1)) + " : ") + HxOverrides.stringOrNull(python_Boot.toString1(python_Boot.simpleField(o,f1),(("null" if s is None else s) + "\t"))))
-						_g3.append(x1)
-					fieldsStr1 = _g3
+					def _hx_local_8():
+						_g3 = []
+						_g12 = 0
+						while (_g12 < len(fields1)):
+							f1 = (fields1[_g12] if _g12 >= 0 and _g12 < len(fields1) else None)
+							_g12 = (_g12 + 1)
+							x1 = ((("" + ("null" if f1 is None else f1)) + " : ") + HxOverrides.stringOrNull(python_Boot.toString1(python_Boot.simpleField(o,f1),(("null" if s is None else s) + "\t"))))
+							_g3.append(x1)
+						return _g3
+					fieldsStr1 = _hx_local_8()
 					toStr1 = (((HxOverrides.stringOrNull(o._hx_class_name) + "( ") + HxOverrides.stringOrNull(", ".join([x1 for x1 in fieldsStr1]))) + " )")
 					return toStr1
 				else:
 					fields2 = python_Boot.getClassFields(o)
-					fieldsStr2 = None
-					_g4 = []
-					_g13 = 0
-					while (_g13 < len(fields2)):
-						f2 = (fields2[_g13] if _g13 >= 0 and _g13 < len(fields2) else None)
-						_g13 = (_g13 + 1)
-						x2 = ((("" + ("null" if f2 is None else f2)) + " : ") + HxOverrides.stringOrNull(python_Boot.toString1(python_Boot.simpleField(o,f2),(("null" if s is None else s) + "\t"))))
-						_g4.append(x2)
-					fieldsStr2 = _g4
+					def _hx_local_10():
+						_g4 = []
+						_g13 = 0
+						while (_g13 < len(fields2)):
+							f2 = (fields2[_g13] if _g13 >= 0 and _g13 < len(fields2) else None)
+							_g13 = (_g13 + 1)
+							x2 = ((("" + ("null" if f2 is None else f2)) + " : ") + HxOverrides.stringOrNull(python_Boot.toString1(python_Boot.simpleField(o,f2),(("null" if s is None else s) + "\t"))))
+							_g4.append(x2)
+						return _g4
+					fieldsStr2 = _hx_local_10()
 					toStr2 = (((("#" + HxOverrides.stringOrNull(o._hx_class_name)) + "( ") + HxOverrides.stringOrNull(", ".join([x1 for x1 in fieldsStr2]))) + " )")
 					return toStr2
 			if (o == str):
@@ -494,236 +547,535 @@ class python_Boot:
 
 	@staticmethod
 	def simpleField(o,field):
-		if (field is None):
+		tmp = (field is None)
+		if tmp:
 			return None
-		field1 = None
+		tmp1 = None
 		if field in python_Boot.keywords:
-			field1 = ("_hx_" + field)
-		elif ((((len(field) > 2) and ((ord(field[0]) == 95))) and ((ord(field[1]) == 95))) and ((ord(field[(len(field) - 1)]) != 95))):
-			field1 = ("_hx_" + field)
+			tmp1 = ("_hx_" + field)
 		else:
-			field1 = field
-		if hasattr(o,field1):
-			return getattr(o,field1)
+			tmp2 = (len(field) > 2)
+			tmp3 = tmp2
+			tmp4 = None
+			if tmp3:
+				tmp5 = ord(field[0])
+				tmp6 = tmp5
+				tmp7 = tmp6
+				tmp4 = (tmp7 == 95)
+			else:
+				tmp4 = False
+			tmp8 = tmp4
+			tmp9 = None
+			if tmp8:
+				tmp10 = ord(field[1])
+				tmp11 = tmp10
+				tmp12 = tmp11
+				tmp9 = (tmp12 == 95)
+			else:
+				tmp9 = False
+			tmp13 = None
+			if tmp9:
+				tmp14 = ord(field[(len(field) - 1)])
+				tmp15 = tmp14
+				tmp13 = (tmp15 != 95)
+			else:
+				tmp13 = False
+			if tmp13:
+				tmp1 = ("_hx_" + field)
+			else:
+				tmp1 = field
+		field1 = tmp1
+		tmp16 = o
+		tmp17 = hasattr(tmp16,field1)
+		tmp18 = None
+		if tmp17:
+			tmp19 = o
+			tmp18 = getattr(tmp19,field1)
 		else:
-			return None
+			tmp18 = None
+		return tmp18
 
 	@staticmethod
 	def field(o,field):
-		if (field is None):
+		tmp = (field is None)
+		if tmp:
 			return None
-		_hx_local_0 = len(field)
+		tmp1 = field
+		_hx_local_0 = len(tmp1)
 		if (_hx_local_0 == 10):
-			if (field == "charCodeAt"):
-				if isinstance(o,str):
+			if (tmp1 == "charCodeAt"):
+				tmp29 = o
+				tmp30 = str
+				tmp31 = isinstance(tmp29,tmp30)
+				if tmp31:
+					tmp32 = None
 					s4 = o
 					def _hx_local_1(a11):
-						return HxString.charCodeAt(s4,a11)
-					return _hx_local_1
+						tmp33 = s4
+						tmp34 = a11
+						tmp35 = HxString.charCodeAt(tmp33,tmp34)
+						return tmp35
+					tmp32 = _hx_local_1
+					return tmp32
 		elif (_hx_local_0 == 11):
-			if (field == "toLowerCase"):
-				if isinstance(o,str):
+			if (tmp1 == "toLowerCase"):
+				tmp10 = o
+				tmp11 = str
+				tmp12 = isinstance(tmp10,tmp11)
+				if tmp12:
+					tmp13 = None
 					s1 = o
 					def _hx_local_2():
-						return HxString.toLowerCase(s1)
-					return _hx_local_2
-			elif (field == "toUpperCase"):
-				if isinstance(o,str):
+						tmp14 = s1
+						tmp15 = HxString.toLowerCase(tmp14)
+						return tmp15
+					tmp13 = _hx_local_2
+					return tmp13
+			elif (tmp1 == "toUpperCase"):
+				tmp16 = o
+				tmp17 = str
+				tmp18 = isinstance(tmp16,tmp17)
+				if tmp18:
+					tmp19 = None
 					s2 = o
 					def _hx_local_3():
-						return HxString.toUpperCase(s2)
-					return _hx_local_3
-			elif (field == "lastIndexOf"):
-				if isinstance(o,str):
+						tmp20 = s2
+						tmp21 = HxString.toUpperCase(tmp20)
+						return tmp21
+					tmp19 = _hx_local_3
+					return tmp19
+			elif (tmp1 == "lastIndexOf"):
+				tmp50 = o
+				tmp51 = str
+				tmp52 = isinstance(tmp50,tmp51)
+				if tmp52:
+					tmp53 = None
 					s6 = o
 					def _hx_local_4(a13):
-						return HxString.lastIndexOf(s6,a13)
-					return _hx_local_4
-				elif isinstance(o,list):
-					a2 = o
-					def _hx_local_5(x2):
-						return python_internal_ArrayImpl.lastIndexOf(a2,x2)
-					return _hx_local_5
+						tmp54 = s6
+						tmp55 = a13
+						tmp56 = HxString.lastIndexOf(tmp54,tmp55)
+						return tmp56
+					tmp53 = _hx_local_4
+					return tmp53
+				else:
+					tmp57 = o
+					tmp58 = list
+					tmp59 = isinstance(tmp57,tmp58)
+					if tmp59:
+						tmp60 = None
+						a2 = o
+						def _hx_local_5(x2):
+							tmp61 = a2
+							tmp62 = x2
+							tmp63 = python_internal_ArrayImpl.lastIndexOf(tmp61,tmp62)
+							return tmp63
+						tmp60 = _hx_local_5
+						return tmp60
 		elif (_hx_local_0 == 9):
-			if (field == "substring"):
-				if isinstance(o,str):
+			if (tmp1 == "substring"):
+				tmp78 = o
+				tmp79 = str
+				tmp80 = isinstance(tmp78,tmp79)
+				if tmp80:
+					tmp81 = None
 					s9 = o
 					def _hx_local_6(a15):
-						return HxString.substring(s9,a15)
-					return _hx_local_6
+						tmp82 = s9
+						tmp83 = a15
+						tmp84 = HxString.substring(tmp82,tmp83)
+						return tmp84
+					tmp81 = _hx_local_6
+					return tmp81
 		elif (_hx_local_0 == 5):
-			if (field == "split"):
-				if isinstance(o,str):
+			if (tmp1 == "split"):
+				tmp64 = o
+				tmp65 = str
+				tmp66 = isinstance(tmp64,tmp65)
+				if tmp66:
+					tmp67 = None
 					s7 = o
 					def _hx_local_7(d):
-						return HxString.split(s7,d)
-					return _hx_local_7
-			elif (field == "shift"):
-				if isinstance(o,list):
+						tmp68 = s7
+						tmp69 = d
+						tmp70 = HxString.split(tmp68,tmp69)
+						return tmp70
+					tmp67 = _hx_local_7
+					return tmp67
+			elif (tmp1 == "shift"):
+				tmp172 = o
+				tmp173 = list
+				tmp174 = isinstance(tmp172,tmp173)
+				if tmp174:
+					tmp175 = None
 					x14 = o
 					def _hx_local_8():
-						return python_internal_ArrayImpl.shift(x14)
-					return _hx_local_8
-			elif (field == "slice"):
-				if isinstance(o,list):
+						tmp176 = x14
+						tmp177 = python_internal_ArrayImpl.shift(tmp176)
+						return tmp177
+					tmp175 = _hx_local_8
+					return tmp175
+			elif (tmp1 == "slice"):
+				tmp178 = o
+				tmp179 = list
+				tmp180 = isinstance(tmp178,tmp179)
+				if tmp180:
+					tmp181 = None
 					x15 = o
 					def _hx_local_9(a18):
-						return python_internal_ArrayImpl.slice(x15,a18)
-					return _hx_local_9
+						tmp182 = x15
+						tmp183 = a18
+						tmp184 = python_internal_ArrayImpl.slice(tmp182,tmp183)
+						return tmp184
+					tmp181 = _hx_local_9
+					return tmp181
 		elif (_hx_local_0 == 4):
-			if (field == "copy"):
-				if isinstance(o,list):
+			if (tmp1 == "copy"):
+				tmp118 = o
+				tmp119 = list
+				tmp120 = isinstance(tmp118,tmp119)
+				if tmp120:
 					def _hx_local_10():
+						tmp121 = None
 						x6 = o
-						return list(x6)
+						tmp122 = x6
+						tmp121 = list(tmp122)
+						return tmp121
 					return _hx_local_10
-			elif (field == "join"):
-				if isinstance(o,list):
+			elif (tmp1 == "join"):
+				tmp136 = o
+				tmp137 = list
+				tmp138 = isinstance(tmp136,tmp137)
+				if tmp138:
 					def _hx_local_11(sep):
+						tmp139 = None
 						x9 = o
-						return sep.join([python_Boot.toString1(x1,'') for x1 in x9])
+						tmp140 = sep.join([python_Boot.toString1(x1,'') for x1 in x9])
+						tmp139 = tmp140
+						return tmp139
 					return _hx_local_11
-			elif (field == "push"):
-				if isinstance(o,list):
+			elif (tmp1 == "push"):
+				tmp147 = o
+				tmp148 = list
+				tmp149 = isinstance(tmp147,tmp148)
+				if tmp149:
+					tmp150 = None
 					x11 = o
 					def _hx_local_12(e):
-						return python_internal_ArrayImpl.push(x11,e)
-					return _hx_local_12
-			elif (field == "sort"):
-				if isinstance(o,list):
+						tmp151 = x11
+						tmp152 = e
+						tmp153 = python_internal_ArrayImpl.push(tmp151,tmp152)
+						return tmp153
+					tmp150 = _hx_local_12
+					return tmp150
+			elif (tmp1 == "sort"):
+				tmp185 = o
+				tmp186 = list
+				tmp187 = isinstance(tmp185,tmp186)
+				if tmp187:
+					tmp188 = None
 					x16 = o
 					def _hx_local_13(f2):
-						python_internal_ArrayImpl.sort(x16,f2)
-					return _hx_local_13
+						tmp189 = x16
+						tmp190 = f2
+						python_internal_ArrayImpl.sort(tmp189,tmp190)
+					tmp188 = _hx_local_13
+					return tmp188
 		elif (_hx_local_0 == 7):
-			if (field == "indexOf"):
-				if isinstance(o,str):
+			if (tmp1 == "indexOf"):
+				tmp36 = o
+				tmp37 = str
+				tmp38 = isinstance(tmp36,tmp37)
+				if tmp38:
+					tmp39 = None
 					s5 = o
 					def _hx_local_14(a12):
-						return HxString.indexOf(s5,a12)
-					return _hx_local_14
-				elif isinstance(o,list):
-					a = o
-					def _hx_local_15(x1):
-						return python_internal_ArrayImpl.indexOf(a,x1)
-					return _hx_local_15
-			elif (field == "unshift"):
-				if isinstance(o,list):
+						tmp40 = s5
+						tmp41 = a12
+						tmp42 = HxString.indexOf(tmp40,tmp41)
+						return tmp42
+					tmp39 = _hx_local_14
+					return tmp39
+				else:
+					tmp43 = o
+					tmp44 = list
+					tmp45 = isinstance(tmp43,tmp44)
+					if tmp45:
+						tmp46 = None
+						a = o
+						def _hx_local_15(x1):
+							tmp47 = a
+							tmp48 = x1
+							tmp49 = python_internal_ArrayImpl.indexOf(tmp47,tmp48)
+							return tmp49
+						tmp46 = _hx_local_15
+						return tmp46
+			elif (tmp1 == "unshift"):
+				tmp154 = o
+				tmp155 = list
+				tmp156 = isinstance(tmp154,tmp155)
+				if tmp156:
+					tmp157 = None
 					x12 = o
 					def _hx_local_16(e1):
-						python_internal_ArrayImpl.unshift(x12,e1)
-					return _hx_local_16
-			elif (field == "reverse"):
-				if isinstance(o,list):
+						tmp158 = x12
+						tmp159 = e1
+						python_internal_ArrayImpl.unshift(tmp158,tmp159)
+					tmp157 = _hx_local_16
+					return tmp157
+			elif (tmp1 == "reverse"):
+				tmp167 = o
+				tmp168 = list
+				tmp169 = isinstance(tmp167,tmp168)
+				if tmp169:
+					tmp170 = None
 					a4 = o
 					def _hx_local_17():
-						python_internal_ArrayImpl.reverse(a4)
-					return _hx_local_17
+						tmp171 = a4
+						python_internal_ArrayImpl.reverse(tmp171)
+					tmp170 = _hx_local_17
+					return tmp170
 		elif (_hx_local_0 == 3):
-			if (field == "map"):
-				if isinstance(o,list):
+			if (tmp1 == "map"):
+				tmp97 = o
+				tmp98 = list
+				tmp99 = isinstance(tmp97,tmp98)
+				if tmp99:
+					tmp100 = None
 					x4 = o
 					def _hx_local_18(f):
-						return python_internal_ArrayImpl.map(x4,f)
-					return _hx_local_18
-			elif (field == "pop"):
-				if isinstance(o,list):
+						tmp101 = x4
+						tmp102 = f
+						tmp103 = python_internal_ArrayImpl.map(tmp101,tmp102)
+						return tmp103
+					tmp100 = _hx_local_18
+					return tmp100
+			elif (tmp1 == "pop"):
+				tmp141 = o
+				tmp142 = list
+				tmp143 = isinstance(tmp141,tmp142)
+				if tmp143:
+					tmp144 = None
 					x10 = o
 					def _hx_local_19():
-						return python_internal_ArrayImpl.pop(x10)
-					return _hx_local_19
+						tmp145 = x10
+						tmp146 = python_internal_ArrayImpl.pop(tmp145)
+						return tmp146
+					tmp144 = _hx_local_19
+					return tmp144
 		elif (_hx_local_0 == 8):
-			if (field == "toString"):
-				if isinstance(o,str):
+			if (tmp1 == "toString"):
+				tmp85 = o
+				tmp86 = str
+				tmp87 = isinstance(tmp85,tmp86)
+				if tmp87:
+					tmp88 = None
 					s10 = o
 					def _hx_local_20():
-						return HxString.toString(s10)
-					return _hx_local_20
-				elif isinstance(o,list):
-					x3 = o
-					def _hx_local_21():
-						return python_internal_ArrayImpl.toString(x3)
-					return _hx_local_21
-			elif (field == "iterator"):
-				if isinstance(o,list):
+						tmp89 = s10
+						tmp90 = HxString.toString(tmp89)
+						return tmp90
+					tmp88 = _hx_local_20
+					return tmp88
+				else:
+					tmp91 = o
+					tmp92 = list
+					tmp93 = isinstance(tmp91,tmp92)
+					if tmp93:
+						tmp94 = None
+						x3 = o
+						def _hx_local_21():
+							tmp95 = x3
+							tmp96 = python_internal_ArrayImpl.toString(tmp95)
+							return tmp96
+						tmp94 = _hx_local_21
+						return tmp94
+			elif (tmp1 == "iterator"):
+				tmp123 = o
+				tmp124 = list
+				tmp125 = isinstance(tmp123,tmp124)
+				if tmp125:
+					tmp126 = None
 					x7 = o
 					def _hx_local_22():
-						return python_internal_ArrayImpl.iterator(x7)
-					return _hx_local_22
+						tmp127 = x7
+						tmp128 = python_internal_ArrayImpl.iterator(tmp127)
+						return tmp128
+					tmp126 = _hx_local_22
+					return tmp126
 		elif (_hx_local_0 == 6):
-			if (field == "length"):
-				if isinstance(o,str):
+			if (tmp1 == "length"):
+				tmp2 = o
+				tmp3 = str
+				tmp4 = isinstance(tmp2,tmp3)
+				if tmp4:
+					tmp5 = None
 					s = o
-					return len(s)
-				elif isinstance(o,list):
-					x = o
-					return len(x)
-			elif (field == "charAt"):
-				if isinstance(o,str):
+					tmp5 = len(s)
+					return tmp5
+				else:
+					tmp6 = o
+					tmp7 = list
+					tmp8 = isinstance(tmp6,tmp7)
+					if tmp8:
+						tmp9 = None
+						x = o
+						tmp9 = len(x)
+						return tmp9
+			elif (tmp1 == "charAt"):
+				tmp22 = o
+				tmp23 = str
+				tmp24 = isinstance(tmp22,tmp23)
+				if tmp24:
+					tmp25 = None
 					s3 = o
 					def _hx_local_23(a1):
-						return HxString.charAt(s3,a1)
-					return _hx_local_23
-			elif (field == "substr"):
-				if isinstance(o,str):
+						tmp26 = s3
+						tmp27 = a1
+						tmp28 = HxString.charAt(tmp26,tmp27)
+						return tmp28
+					tmp25 = _hx_local_23
+					return tmp25
+			elif (tmp1 == "substr"):
+				tmp71 = o
+				tmp72 = str
+				tmp73 = isinstance(tmp71,tmp72)
+				if tmp73:
+					tmp74 = None
 					s8 = o
 					def _hx_local_24(a14):
-						return HxString.substr(s8,a14)
-					return _hx_local_24
-			elif (field == "filter"):
-				if isinstance(o,list):
+						tmp75 = s8
+						tmp76 = a14
+						tmp77 = HxString.substr(tmp75,tmp76)
+						return tmp77
+					tmp74 = _hx_local_24
+					return tmp74
+			elif (tmp1 == "filter"):
+				tmp104 = o
+				tmp105 = list
+				tmp106 = isinstance(tmp104,tmp105)
+				if tmp106:
+					tmp107 = None
 					x5 = o
 					def _hx_local_25(f1):
-						return python_internal_ArrayImpl.filter(x5,f1)
-					return _hx_local_25
-			elif (field == "concat"):
-				if isinstance(o,list):
+						tmp108 = x5
+						tmp109 = f1
+						tmp110 = python_internal_ArrayImpl.filter(tmp108,tmp109)
+						return tmp110
+					tmp107 = _hx_local_25
+					return tmp107
+			elif (tmp1 == "concat"):
+				tmp111 = o
+				tmp112 = list
+				tmp113 = isinstance(tmp111,tmp112)
+				if tmp113:
+					tmp114 = None
 					a16 = o
 					def _hx_local_26(a21):
-						return python_internal_ArrayImpl.concat(a16,a21)
-					return _hx_local_26
-			elif (field == "insert"):
-				if isinstance(o,list):
+						tmp115 = a16
+						tmp116 = a21
+						tmp117 = python_internal_ArrayImpl.concat(tmp115,tmp116)
+						return tmp117
+					tmp114 = _hx_local_26
+					return tmp114
+			elif (tmp1 == "insert"):
+				tmp129 = o
+				tmp130 = list
+				tmp131 = isinstance(tmp129,tmp130)
+				if tmp131:
+					tmp132 = None
 					a3 = o
 					def _hx_local_27(a17,x8):
-						python_internal_ArrayImpl.insert(a3,a17,x8)
-					return _hx_local_27
-			elif (field == "remove"):
-				if isinstance(o,list):
+						tmp133 = a3
+						tmp134 = a17
+						tmp135 = x8
+						python_internal_ArrayImpl.insert(tmp133,tmp134,tmp135)
+					tmp132 = _hx_local_27
+					return tmp132
+			elif (tmp1 == "remove"):
+				tmp160 = o
+				tmp161 = list
+				tmp162 = isinstance(tmp160,tmp161)
+				if tmp162:
+					tmp163 = None
 					x13 = o
 					def _hx_local_28(e2):
-						return python_internal_ArrayImpl.remove(x13,e2)
-					return _hx_local_28
-			elif (field == "splice"):
-				if isinstance(o,list):
+						tmp164 = x13
+						tmp165 = e2
+						tmp166 = python_internal_ArrayImpl.remove(tmp164,tmp165)
+						return tmp166
+					tmp163 = _hx_local_28
+					return tmp163
+			elif (tmp1 == "splice"):
+				tmp191 = o
+				tmp192 = list
+				tmp193 = isinstance(tmp191,tmp192)
+				if tmp193:
+					tmp194 = None
 					x17 = o
 					def _hx_local_29(a19,a22):
-						return python_internal_ArrayImpl.splice(x17,a19,a22)
-					return _hx_local_29
+						tmp195 = x17
+						tmp196 = a19
+						tmp197 = a22
+						tmp198 = python_internal_ArrayImpl.splice(tmp195,tmp196,tmp197)
+						return tmp198
+					tmp194 = _hx_local_29
+					return tmp194
 		else:
 			pass
-		field1 = None
+		tmp199 = None
 		if field in python_Boot.keywords:
-			field1 = ("_hx_" + field)
-		elif ((((len(field) > 2) and ((ord(field[0]) == 95))) and ((ord(field[1]) == 95))) and ((ord(field[(len(field) - 1)]) != 95))):
-			field1 = ("_hx_" + field)
+			tmp199 = ("_hx_" + field)
 		else:
-			field1 = field
-		if hasattr(o,field1):
-			return getattr(o,field1)
+			tmp200 = (len(field) > 2)
+			tmp201 = tmp200
+			tmp202 = None
+			if tmp201:
+				tmp203 = ord(field[0])
+				tmp204 = tmp203
+				tmp205 = tmp204
+				tmp202 = (tmp205 == 95)
+			else:
+				tmp202 = False
+			tmp206 = tmp202
+			tmp207 = None
+			if tmp206:
+				tmp208 = ord(field[1])
+				tmp209 = tmp208
+				tmp210 = tmp209
+				tmp207 = (tmp210 == 95)
+			else:
+				tmp207 = False
+			tmp211 = None
+			if tmp207:
+				tmp212 = ord(field[(len(field) - 1)])
+				tmp213 = tmp212
+				tmp211 = (tmp213 != 95)
+			else:
+				tmp211 = False
+			if tmp211:
+				tmp199 = ("_hx_" + field)
+			else:
+				tmp199 = field
+		field1 = tmp199
+		tmp214 = o
+		tmp215 = hasattr(tmp214,field1)
+		tmp216 = None
+		if tmp215:
+			tmp217 = o
+			tmp216 = getattr(tmp217,field1)
 		else:
-			return None
+			tmp216 = None
+		return tmp216
 
 	@staticmethod
 	def getInstanceFields(c):
-		f = None
-		if hasattr(c,"_hx_fields"):
-			f = c._hx_fields
-		else:
-			f = []
+		f = (c._hx_fields if (hasattr(c,"_hx_fields")) else [])
 		if hasattr(c,"_hx_methods"):
-			a = c._hx_methods
-			f = (f + a)
+			def _hx_local_0():
+				a = c._hx_methods
+				return (f + a)
+			f = _hx_local_0()
 		sc = python_Boot.getSuperClass(c)
 		if (sc is None):
 			return f
@@ -762,11 +1114,19 @@ class python_Boot:
 
 	@staticmethod
 	def unhandleKeywords(name):
-		if (HxString.substr(name,0,python_Boot.prefixLength) == "_hx_"):
-			real = HxString.substr(name,python_Boot.prefixLength,None)
+		tmp = name
+		tmp1 = python_Boot.prefixLength
+		tmp2 = HxString.substr(tmp,0,tmp1)
+		tmp3 = (tmp2 == "_hx_")
+		if tmp3:
+			tmp4 = name
+			tmp5 = python_Boot.prefixLength
+			tmp6 = HxString.substr(tmp4,tmp5,None)
+			real = tmp6
 			if real in python_Boot.keywords:
 				return real
-		return name
+		tmp7 = name
+		return tmp7
 
 
 class python_HaxeIterator:
@@ -785,15 +1145,22 @@ class python_HaxeIterator:
 		self.it = it
 
 	def next(self):
-		if (not self.checked):
+		tmp = self.checked
+		tmp1 = (not tmp)
+		if tmp1:
 			self.hasNext()
 		self.checked = False
-		return self.x
+		tmp2 = self.x
+		return tmp2
 
 	def hasNext(self):
-		if (not self.checked):
+		tmp = self.checked
+		tmp1 = (not tmp)
+		if tmp1:
 			try:
-				self.x = self.it.__next__()
+				tmp2 = self.it
+				tmp3 = tmp2.__next__()
+				self.x = tmp3
 				self.has = True
 			except Exception as _hx_e:
 				_hx_e1 = _hx_e
@@ -804,7 +1171,8 @@ class python_HaxeIterator:
 				else:
 					raise _hx_e
 			self.checked = True
-		return self.has
+		tmp4 = self.has
+		return tmp4
 
 
 
@@ -818,64 +1186,94 @@ class python_internal_ArrayImpl:
 
 	@staticmethod
 	def iterator(x):
-		return python_HaxeIterator(x.__iter__())
+		tmp = python_HaxeIterator(x.__iter__())
+		return tmp
 
 	@staticmethod
 	def indexOf(a,x,fromIndex = None):
 		_hx_len = len(a)
-		l = None
-		if (fromIndex is None):
-			l = 0
-		elif (fromIndex < 0):
-			l = (_hx_len + fromIndex)
+		tmp = (fromIndex is None)
+		tmp1 = None
+		if tmp:
+			tmp1 = 0
 		else:
-			l = fromIndex
-		if (l < 0):
+			tmp2 = (fromIndex < 0)
+			if tmp2:
+				tmp1 = (_hx_len + fromIndex)
+			else:
+				tmp1 = fromIndex
+		l = tmp1
+		tmp3 = (l < 0)
+		if tmp3:
 			l = 0
 		_g = l
-		while (_g < _hx_len):
-			i = _g
+		while True:
+			tmp4 = (_g < _hx_len)
+			tmp5 = (not tmp4)
+			if tmp5:
+				break
+			tmp6 = _g
 			_g = (_g + 1)
-			if (a[i] == x):
+			i = tmp6
+			tmp7 = (a[i] == x)
+			if tmp7:
 				return i
 		return -1
 
 	@staticmethod
 	def lastIndexOf(a,x,fromIndex = None):
 		_hx_len = len(a)
-		l = None
-		if (fromIndex is None):
-			l = _hx_len
-		elif (fromIndex < 0):
-			l = ((_hx_len + fromIndex) + 1)
+		tmp = (fromIndex is None)
+		tmp1 = None
+		if tmp:
+			tmp1 = _hx_len
 		else:
-			l = (fromIndex + 1)
-		if (l > _hx_len):
+			tmp2 = (fromIndex < 0)
+			if tmp2:
+				tmp3 = (_hx_len + fromIndex)
+				tmp1 = (tmp3 + 1)
+			else:
+				tmp1 = (fromIndex + 1)
+		l = tmp1
+		tmp4 = (l > _hx_len)
+		if tmp4:
 			l = _hx_len
-		def _hx_local_1():
-			nonlocal l
+		while True:
 			l = (l - 1)
-			return l
-		while (_hx_local_1() > -1):
-			if (a[l] == x):
-				return l
+			tmp5 = l
+			tmp6 = (tmp5 > -1)
+			tmp7 = (not tmp6)
+			if tmp7:
+				break
+			tmp8 = (a[l] == x)
+			if tmp8:
+				tmp9 = l
+				return tmp9
 		return -1
 
 	@staticmethod
 	def toString(x):
-		return (("[" + HxOverrides.stringOrNull(",".join([python_Boot.toString1(x1,'') for x1 in x]))) + "]")
+		tmp = ",".join([python_Boot.toString1(x1,'') for x1 in x])
+		tmp1 = tmp
+		tmp2 = ("[" + ("null" if tmp1 is None else tmp1))
+		tmp3 = (("null" if tmp2 is None else tmp2) + "]")
+		return tmp3
 
 	@staticmethod
 	def pop(x):
-		if (len(x) == 0):
-			return None
+		tmp = (len(x) == 0)
+		tmp1 = None
+		if tmp:
+			tmp1 = None
 		else:
-			return x.pop()
+			tmp1 = x.pop()
+		return tmp1
 
 	@staticmethod
 	def push(x,e):
 		x.append(e)
-		return len(x)
+		tmp = len(x)
+		return tmp
 
 	@staticmethod
 	def unshift(x,e):
@@ -893,7 +1291,8 @@ class python_internal_ArrayImpl:
 
 	@staticmethod
 	def shift(x):
-		if (len(x) == 0):
+		tmp = (len(x) == 0)
+		if tmp:
 			return None
 		return x.pop(0)
 
@@ -907,9 +1306,12 @@ class python_internal_ArrayImpl:
 
 	@staticmethod
 	def splice(x,pos,_hx_len):
-		if (pos < 0):
-			pos = (len(x) + pos)
-		if (pos < 0):
+		tmp = (pos < 0)
+		if tmp:
+			tmp1 = (len(x) + pos)
+			pos = tmp1
+		tmp2 = (pos < 0)
+		if tmp2:
 			pos = 0
 		res = x[pos:(pos + _hx_len)]
 		del x[pos:(pos + _hx_len)]
@@ -917,11 +1319,19 @@ class python_internal_ArrayImpl:
 
 	@staticmethod
 	def map(x,f):
-		return list(map(f,x))
+		tmp = f
+		tmp1 = x
+		tmp2 = map(tmp,tmp1)
+		tmp3 = list(tmp2)
+		return tmp3
 
 	@staticmethod
 	def filter(x,f):
-		return list(filter(f,x))
+		tmp = f
+		tmp1 = x
+		tmp2 = filter(tmp,tmp1)
+		tmp3 = list(tmp2)
+		return tmp3
 
 	@staticmethod
 	def insert(a,pos,x):
@@ -933,10 +1343,18 @@ class python_internal_ArrayImpl:
 
 	@staticmethod
 	def _get(x,idx):
-		if ((idx > -1) and ((idx < len(x)))):
-			return x[idx]
+		tmp = (idx > -1)
+		tmp1 = None
+		if tmp:
+			tmp1 = (idx < len(x))
 		else:
-			return None
+			tmp1 = False
+		tmp2 = None
+		if tmp1:
+			tmp2 = x[idx]
+		else:
+			tmp2 = None
+		return tmp2
 
 
 class HxOverrides:
@@ -951,10 +1369,13 @@ class HxOverrides:
 
 	@staticmethod
 	def stringOrNull(s):
-		if (s is None):
-			return "null"
+		tmp = (s is None)
+		tmp1 = None
+		if tmp:
+			tmp1 = "null"
 		else:
-			return s
+			tmp1 = s
+		return tmp1
 
 
 class HxString:
@@ -963,41 +1384,90 @@ class HxString:
 
 	@staticmethod
 	def split(s,d):
-		if (d == ""):
-			return list(s)
+		tmp = (d == "")
+		tmp1 = None
+		if tmp:
+			tmp2 = s
+			tmp1 = list(tmp2)
 		else:
-			return s.split(d)
+			tmp1 = s.split(d)
+		return tmp1
 
 	@staticmethod
 	def charCodeAt(s,index):
-		if ((((s is None) or ((len(s) == 0))) or ((index < 0))) or ((index >= len(s)))):
-			return None
+		tmp = (s is None)
+		tmp1 = (not tmp)
+		tmp2 = tmp1
+		tmp3 = None
+		if tmp2:
+			tmp3 = (len(s) == 0)
 		else:
-			return ord(s[index])
+			tmp3 = True
+		tmp4 = (not tmp3)
+		tmp5 = tmp4
+		tmp6 = None
+		if tmp5:
+			tmp6 = (index < 0)
+		else:
+			tmp6 = True
+		tmp7 = (not tmp6)
+		tmp8 = None
+		if tmp7:
+			tmp8 = (index >= len(s))
+		else:
+			tmp8 = True
+		tmp9 = None
+		if tmp8:
+			tmp9 = None
+		else:
+			tmp9 = ord(s[index])
+		return tmp9
 
 	@staticmethod
 	def charAt(s,index):
-		if ((index < 0) or ((index >= len(s)))):
-			return ""
+		tmp = (index < 0)
+		tmp1 = (not tmp)
+		tmp2 = None
+		if tmp1:
+			tmp2 = (index >= len(s))
 		else:
-			return s[index]
+			tmp2 = True
+		tmp3 = None
+		if tmp2:
+			tmp3 = ""
+		else:
+			tmp3 = s[index]
+		return tmp3
 
 	@staticmethod
 	def lastIndexOf(s,_hx_str,startIndex = None):
-		if (startIndex is None):
+		tmp = (startIndex is None)
+		if tmp:
 			return s.rfind(_hx_str, 0, len(s))
 		else:
 			i = s.rfind(_hx_str, 0, (startIndex + 1))
-			startLeft = None
-			if (i == -1):
-				startLeft = max(0,((startIndex + 1) - len(_hx_str)))
+			tmp1 = (i == -1)
+			tmp2 = None
+			if tmp1:
+				tmp3 = (startIndex + 1)
+				tmp4 = len(_hx_str)
+				tmp5 = (tmp3 - tmp4)
+				tmp2 = max(0,tmp5)
 			else:
-				startLeft = (i + 1)
+				tmp2 = (i + 1)
+			startLeft = tmp2
 			check = s.find(_hx_str, startLeft, len(s))
-			if ((check > i) and ((check <= startIndex))):
+			tmp6 = (check > i)
+			tmp7 = None
+			if tmp6:
+				tmp7 = (check <= startIndex)
+			else:
+				tmp7 = False
+			if tmp7:
 				return check
 			else:
-				return i
+				tmp8 = i
+				return tmp8
 
 	@staticmethod
 	def toUpperCase(s):
@@ -1009,44 +1479,61 @@ class HxString:
 
 	@staticmethod
 	def indexOf(s,_hx_str,startIndex = None):
-		if (startIndex is None):
+		tmp = (startIndex is None)
+		if tmp:
 			return s.find(_hx_str)
 		else:
 			return s.find(_hx_str, startIndex)
 
 	@staticmethod
 	def toString(s):
-		return s
+		tmp = s
+		return tmp
 
 	@staticmethod
 	def substring(s,startIndex,endIndex = None):
-		if (startIndex < 0):
+		tmp = (startIndex < 0)
+		if tmp:
 			startIndex = 0
-		if (endIndex is None):
+		tmp1 = (endIndex is None)
+		if tmp1:
 			return s[startIndex:]
 		else:
-			if (endIndex < 0):
+			tmp2 = (endIndex < 0)
+			if tmp2:
 				endIndex = 0
-			if (endIndex < startIndex):
+			tmp3 = (endIndex < startIndex)
+			if tmp3:
 				return s[endIndex:startIndex]
 			else:
 				return s[startIndex:endIndex]
 
 	@staticmethod
 	def substr(s,startIndex,_hx_len = None):
-		if (_hx_len is None):
+		tmp = (_hx_len is None)
+		if tmp:
 			return s[startIndex:]
 		else:
-			if (_hx_len == 0):
+			tmp1 = (_hx_len == 0)
+			if tmp1:
 				return ""
 			return s[startIndex:(startIndex + _hx_len)]
 
-Math.NEGATIVE_INFINITY = float("-inf")
-Math.POSITIVE_INFINITY = float("inf")
-Math.NaN = float("nan")
-Math.PI = python_lib_Math.pi
+tmp = float("-inf")
+Math.NEGATIVE_INFINITY = tmp
+tmp1 = float("inf")
+Math.POSITIVE_INFINITY = tmp1
+tmp2 = float("nan")
+Math.NaN = tmp2
+tmp3 = python_lib_Math.pi
+Math.PI = tmp3
 
-python_Boot.keywords = set(["and", "del", "from", "not", "with", "as", "elif", "global", "or", "yield", "assert", "else", "if", "pass", "None", "break", "except", "import", "raise", "True", "class", "exec", "in", "return", "False", "continue", "finally", "is", "try", "def", "for", "lambda", "while"])
+def _hx_init_python_Boot_keywords():
+	def _hx_local_0():
+		tmp = ["and", "del", "from", "not", "with", "as", "elif", "global", "or", "yield", "assert", "else", "if", "pass", "None", "break", "except", "import", "raise", "True", "class", "exec", "in", "return", "False", "continue", "finally", "is", "try", "def", "for", "lambda", "while"]
+		return set(tmp)
+	return _hx_local_0()
+python_Boot.keywords = _hx_init_python_Boot_keywords()
 python_Boot.prefixLength = len("_hx_")
 
 Server.main()
