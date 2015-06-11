@@ -1,11 +1,11 @@
--js build/static/js/client.js
--main Client
 -lib erazor
 -dce full
 -D analyzer
+--each
+
+-js build/static/js/client.js
+-main Client
+
 --next
 -python build/server.py
 -main Server
--lib erazor
--dce full
--D analyzer
